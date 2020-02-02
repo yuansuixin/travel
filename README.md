@@ -28,6 +28,7 @@ npm run build --report
 ```bash
 # 解决300毫秒延迟问题
 npm install fastclick --save
-
+npm install stylus --save 
+npm install stylus-loader --save
 ```
 
