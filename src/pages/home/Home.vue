@@ -2,7 +2,7 @@
 <div>
  <home-header></home-header>
  <home-swiper :list="swiperList"></home-swiper>
- <home-icons :list="iconList"></home-icons>
+ <home-icons :list ="iconList"></home-icons>
  <home-recommend :list="recommendList"></home-recommend>
  <home-weekend :list="weekendList"></home-weekend>
 </div>
@@ -15,6 +15,7 @@
   import HomeRecommend from './components/Recommend';
   import HomeWeekend from './components/Weekend';
   import axios from 'axios';
+  import {mapState} from 'vuex';
   export default {
     name: 'Home',
     components: {
@@ -29,15 +30,16 @@
         swiperList: [],
         iconList: [],
         recommendList: [],
-        weekendList: []
+        weekendList: [],
+        lastCity: ''
       };
     },
-    mounted() {
-      this.getHomeInfo();
+    computed: {
+      ...mapState(['city'])
     },
     methods: {
       getHomeInfo() {
-        axios.get('/api/index.json')
+        axios.get('/api/index.json?city=' + this.city)
           .then(this.getHomeInfoSucc);
       },
       getHomeInfoSucc(res) {
@@ -50,6 +52,18 @@
           this.recommendList = data.recommendList;
           this.weekendList = data.weekendList;
         }
+      }
+    },
+    mounted() {
+      this.lastCity = this.city;
+      this.getHomeInfo();
+    },
+    // 使用keep-alive新增的生命周期函数
+    activated() {
+      console.log('activated');
+      if (this.lastCity !== this.city) {
+        this.lastCity = this.city;
+        this.getHomeInfo();
       }
     }
   };
