@@ -1,8 +1,8 @@
 <template>
 <div class="wrapper">
- <swiper :options="swiperOption">
+ <swiper :options="swiperOption" v-if="showSwiper">
     <!-- slides -->
-    <swiper-slide v-for="item of swiperList" :key='item.id'>
+    <swiper-slide v-for="item of list" :key='item.id'>
         <img class="swiper-img" :src="item.imgUrl" alt="">
     </swiper-slide>
     <!-- Optional controls -->
@@ -14,20 +14,21 @@
 <script>
   export default {
     name: 'HomeSwiper',
+    props: {
+      list: Array
+    },
     data() {
       return {
         swiperOption: {
           pagination: '.swiper-pagination',
           loop: true // 循环轮播
-        },
-        swiperList: [{
-          id: '001',
-          imgUrl: 'https://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20201/be6871c9b0b0ffab3ef2a86fa9688677.jpg'
-        }, {
-          id: '002',
-          imgUrl: 'https://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20201/be6871c9b0b0ffab3ef2a86fa9688677.jpg'
-        }]
+        }
       };
+    },
+    computed: {
+      showSwiper() {
+        return this.list.length;
+      }
     }
   };
 </script>
@@ -38,7 +39,7 @@
     width 100%
     height 0
     overflow hidden
-    padding-bottom 26.7%  //相对于宽度
+    padding-bottom 31.25%  //相对于宽度
     background #eee
     .swiper-img
         width 100%
