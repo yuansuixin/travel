@@ -34,5 +34,7 @@ npm install vue-awesome-swiper@2.6.7 --save
 cnpm install axios --save
 npm install better-scroll --save
 npm isntall vuex --save  
+# 兼容问题
+npm install babel-polyfill --save
 ```
 
