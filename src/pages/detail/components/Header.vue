@@ -42,7 +42,11 @@
       }
     },
     activated() {
-      window.addEventListener('scroll', this.handleScroll);
+      window.addEventListener('scroll', this.handleScroll); // 全局绑定
+    },
+    // keep-alive提供的生命周期函数
+    deactivated() {
+      window.removeEventListener('scroll', this.handleScroll); // 解绑
     }
   };
 </script>
