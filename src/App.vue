@@ -1,7 +1,8 @@
 
 <template>
   <div id="app">
-    <keep-alive>
+    <!-- detail页面不做缓存 -->
+    <keep-alive exclude="Detail">
       <router-view/>
     </keep-alive>
   </div>
@@ -12,7 +13,3 @@
     name: 'App'
   };
 </script>
-
-<style>
-
-</style>

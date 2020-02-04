@@ -1,23 +1,28 @@
 <template>
 <div>
   <div class="banner" @click="handleBannerClick">
-    <img class="banner-img" src="//tr-osdcp.qunarzz.com/tr-osd-tr-manager/img/7d9b233c71cad13ded0013f9c9cec635.jpg" alt="">
+    <img class="banner-img" :src="bannerImg" alt="">
     <div class="banner-info">
       <div class="banner-title">
-        大连圣亚海洋世界(AAAA景区)
+        {{this.sightName}}
       </div>
       <div class="banner-number">
-        <span class="iconfont banner-icon">&#xe692;39</span>
+        <span class="iconfont banner-icon">&#xe692;{{this.bannerImgs.length}}</span>
       </div>
     </div>
   </div>
-  <common-gallary :imgs="imgs" v-show="showGallary" @close="handleGallayClose"></common-gallary>
+  <common-gallary :imgs="bannerImgs" v-show="showGallary" @close="handleGallayClose"></common-gallary>
 </div>
 </template>
 <script>
   import CommonGallary from 'common/gallary/Gallary';
   export default {
     name: 'DetailBanner',
+    props: {
+      sightName: String,
+      bannerImg: String,
+      bannerImgs: Array
+    },
     data() {
       return {
         imgs: [],
